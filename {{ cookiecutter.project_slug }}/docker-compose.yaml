@@ -1,0 +1,8 @@
+services:
+        protobuilder:
+                image: protobuilder
+                build: .
+                volumes:
+                        - .:/protobufs
+                working_dir: /protobufs
+                command: buf generate 

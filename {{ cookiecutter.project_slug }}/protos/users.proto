@@ -1,0 +1,50 @@
+syntax = "proto3";
+option go_package = ".;protobufs";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service Users {
+    rpc LoginUser(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/users/login"
+            body: "*"
+        };
+    }
+    rpc RegisterUser(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/users/register"
+            body: "*"
+        };
+    }
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+        option (google.api.http) = {
+            delete: "/users/{ID}"
+        };
+    }
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            put: "/users/{ID}"
+            body: "*"
+        };
+    }
+}
+
+message DeleteUserRequest {
+    string ID = 1; 
+}
+message DeleteUserResponse {
+}
+message UpdateUserRequest {
+    string ID = 1;
+    string Email = 2;
+    string Password = 3;
+}
+message UpdateUserResponse {
+}
+message LoginRequest {
+    string Email = 1;
+    string Password = 2;
+}
+message LoginResponse {
+}
+
